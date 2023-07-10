@@ -1,0 +1,52 @@
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  margin-top: 55px;
+  gap: 15px;
+
+  header {
+    padding: 5px 15px;
+
+    h1 {
+      color: var(--color-white);
+    }
+  }
+
+  .input-name,
+  .input-email,
+  .input-password {
+    label {
+      color: var(--color-gray-light);
+    }
+
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+
+    input {
+      height: 35px;
+      border-radius: 3px;
+      padding: 6px 12px;
+      border: none;
+      margin-top: 5px;
+    }
+  }
+
+  button {
+    border-radius: 8px;
+    border: none;
+    width: 50%;
+    height: 30px;
+    cursor: pointer;
+    color: white;
+    transition: all 0.8s;
+    background-color: var(--color-green-success-mid);
+  }
+
+  button:hover {
+    background-color: var(--color-green-success-light);
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "product": "Cadeira Gamer RGB",
+      "imageUrl": "https://i.ibb.co/h9zbBLF/product-image-cadeira.jpg",
+      "salePrice": "",
+      "price": 899
+    },
+    {
+      "id": 2,
+      "product": "Fone Dragão RGB",
+      "imageUrl": "https://i.ibb.co/T8CwWkk/product-image-headset.jpg",
+      "salePrice": 100,
+      "price": 150
+    },
+    {
+      "id": 3,
+      "product": "Monitor Odyssey G9",
+      "imageUrl": "https://i.ibb.co/2ZzD1zG/product-image-monitor.jpg",
+      "salePrice": "",
+      "price": 3500
+    },
+    {
+      "id": 3,
+      "product": "Pato decorativo (+fps)",
+      "imageUrl": "https://i.ibb.co/jTcsSzn/product-image-patinho.jpg",
+      "salePrice": "",
+      "price": 5
+    },
+    {
+      "id": 4,
+      "product": "Teclado Gamer RGB",
+      "imageUrl": "https://i.ibb.co/mtjv9zb/product-image-teclado.jpg",
+      "salePrice": 200,
+      "price": 250
+    }
+  ],
+  "cartProducts": [
+    {
+      "id": 0.5925097217348652,
+      "product": "Fone Dragão RGB",
+      "imageUrl": "https://i.ibb.co/T8CwWkk/product-image-headset.jpg",
+      "salePrice": 100,
+      "price": 150
+    }
+  ]
+}

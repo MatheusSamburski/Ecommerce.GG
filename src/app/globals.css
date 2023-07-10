@@ -1,27 +1,49 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+* {
+  font-family: "Open Sans", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: var(--color-background);
+}
+
+:root {
+  --color-purple-dark: #633bbc;
+  --color-purple-mid: #8257e5;
+  --color-purple-light: #996dff;
+
+  --color-blue-light: #6a80ff;
+  --color-blue-dark: #3249cb;
+  --color-blue-mid: #4863f7;
+  --color-blue-low: #182049;
+
+  --color-green-mid: #00875f;
+  --color-green-light: #00b37e;
+  --color-green-success-light: #04d361;
+  --color-green-success-mid: #1b873f;
+
+  --color-red-dark: #ad1e12;
+  --color-red-mid: #d73628;
+  --color-red-light: #fc4737;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --color-gray-light: #a8a8b3;
+  --color-modal: rgb(32, 32, 36);
+
+  --color-background: #121214;
+
+  --color-brand-color: #9333ea;
+  --color-brand-color-light: #a855f7;
+  --color-brand-color-lighter: #c084fc;
+  --color-text-color-primary: #f9fafb;
+  --color-text-color-secondary: #e4e4e7;
+  --color-close-button-color: #a1a1aa;
+  --color-stroke-color: #3f3f46;
+  --color-surface-color: #18181b;
+  --color-background-color: #09090b;
 }

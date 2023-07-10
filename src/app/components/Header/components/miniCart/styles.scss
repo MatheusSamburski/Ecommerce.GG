@@ -1,0 +1,177 @@
+.app {
+  height: 100vh;
+  max-width: 42.8rem;
+  margin-left: auto;
+  background-color: var(--color-surface-color);
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+}
+
+header {
+  font-size: 20px;
+  color: var(--color-text-color-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-stroke-color);
+  padding: 30px 15px;
+
+  svg {
+    color: var(--color-brand-color);
+  }
+}
+
+.container-products {
+  padding: 15px;
+  display: grid;
+  place-content: start;
+  gap: 30px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0.6rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-stroke-color);
+  border-radius: 0.8rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-background-color);
+}
+
+.item {
+  display: flex;
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+    gap: 15px;
+  }
+}
+
+.item img {
+  object-fit: cover;
+  border-radius: 0.8rem;
+}
+
+.item .title {
+  color: var(--color-text-color-secondary);
+}
+
+.price-qty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.price {
+  font-weight: 700;
+  color: var(--color-red-mid);
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+}
+
+.qty span {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  color: var(--color-text-color-secondary);
+}
+.qty button {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.qty button {
+  color: var(--color-text-color-primary);
+  border-radius: 0.8rem;
+  border: 1px solid white;
+  background-color: transparent;
+  font-size: 1.6rem;
+}
+
+.qty button.add {
+  border-color: var(--color-stroke-color);
+}
+
+.qty button.add:hover {
+  border-color: var(--color-brand-color-light);
+  color: var(--color-text-color-primary);
+}
+
+.qty button.sub {
+  border-color: var(--color-stroke-color);
+}
+
+.qty button.sub:hover {
+  color: var(--color-text-color-primary);
+  border-color: var(--color-brand-color-light);
+}
+
+footer {
+  padding: 20px;
+  border-top: 1px solid var(--color-stroke-color);
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 25px;
+  color: var(--color-text-color-secondary);
+
+  strong {
+    color: var(--color-green-light);
+  }
+}
+
+.cupom {
+  margin-top: 1.6rem;
+  color: var(--color-brand-color-light);
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+
+.cupom i {
+  font-size: 2rem;
+}
+
+footer {
+  button {
+    width: 100%;
+    margin-top: 30px;
+    background-color: var(--color-brand-color);
+    color: var(--color-text-color-primary);
+    border: none;
+    font-size: 20px;
+    padding-block: 20px;
+    border-radius: 0.8rem;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: var(--color-brand-color-light);
+  }
+}
