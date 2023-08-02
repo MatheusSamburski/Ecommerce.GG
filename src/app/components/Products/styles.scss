@@ -62,6 +62,10 @@
       cursor: pointer;
       text-align: center;
       background-color: var(--color-green-light);
+
+      span {
+        color: var(--color-black);
+      }
     }
 
     .button-add-to-cart:hover {

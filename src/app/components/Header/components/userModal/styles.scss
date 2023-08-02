@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: center;
   padding: 30px;
-  margin-top: 55px;
   gap: 15px;
 
   header {
@@ -13,6 +12,14 @@
     h1 {
       color: var(--color-white);
     }
+  }
+
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
   }
 
   .input-name,
@@ -33,6 +40,11 @@
       border: none;
       margin-top: 5px;
     }
+
+    span {
+      font-size: 12px;
+      color: var(--color-red-dark);
+    }
   }
 
   button {
@@ -43,6 +55,7 @@
     cursor: pointer;
     color: white;
     transition: all 0.8s;
+    margin-top: 10px;
     background-color: var(--color-green-success-mid);
   }
 

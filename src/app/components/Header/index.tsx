@@ -1,36 +1,48 @@
 "use client";
-
-import { useState } from "react";
-import { User } from "@/types/User";
-import { UserIsLogged } from "./components/userIsLogged";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import UserModal from "./components/userModal";
 import MiniCart from "./components/miniCart";
+import { UserIsLogged } from "./components/userIsLogged";
+import { RootState, useAppDispatch } from "@/redux/store";
 import { useSelector } from "react-redux";
-import Link from "next/link";
-import {RootState } from "@/redux/store";
+import { openModal, openModalCart } from "@/redux/actions/actions";
 import { BsCart2, BsSearch } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
+import { getCartProduct } from "@/redux/reducers/apiCartProducts";
+import { User } from "@/types/User";
 import "./styles.scss";
 
 export default function Header() {
-  const [userLoginModalIsOpen, setUserLoginModalIsOpen] = useState(false);
-  const [miniCartModalIsOpen, setMiniCartModalIsOpen] = useState(false);
-  const [userLogged, setUserLogged] = useState<User | null>(null);
+  const [cartIsEmpty, setCartIsEmpty] = useState(false);
 
+  const dispatch = useAppDispatch();
+  const isModalLoginOpen = useSelector(
+    (state: RootState) => state.modal.isModalOpen
+  );
+  const isModalCartOpen = useSelector(
+    (state: RootState) => state.modal.isModalCartOpen
+  );
+
+  const [userLogged, setUserLogged] = useState<User | null>(null);
   const products = useSelector(
     (state: RootState) => state.cartProduct.cartProduct
   );
 
+  useEffect(() => {
+    dispatch(getCartProduct());
+  }, [dispatch, products]);
+
+  useEffect(() => {
+    if (products.length === 0) {
+      setCartIsEmpty(true);
+    } else {
+      setCartIsEmpty(false);
+    }
+  }, [products]);
+
   function getUserLogged(user: User) {
     setUserLogged(user);
-  }
-
-  function handleCloseModal() {
-    setUserLoginModalIsOpen(false);
-  }
-
-  function handleCloseMiniCart() {
-    setMiniCartModalIsOpen(false);
   }
 
   return (
@@ -39,34 +51,25 @@ export default function Header() {
       <div className="icons">
         <BsSearch size={20} />
 
-        {products.length === 0 ? (
-          <BsCart2 size={22} onClick={() => setMiniCartModalIsOpen(true)} />
-        ) : (
+        {cartIsEmpty ? (
           <Link href="./Cart">
             <BsCart2 size={22} />
           </Link>
+        ) : (
+          <BsCart2 size={22} onClick={() => dispatch(openModalCart())} />
         )}
 
-        {miniCartModalIsOpen && (
-          <MiniCart
-            isOpen={miniCartModalIsOpen}
-            onClose={handleCloseMiniCart}
-          />
-        )}
+        {isModalCartOpen && <MiniCart isOpen={isModalCartOpen} />}
 
         {userLogged !== null ? (
           <UserIsLogged username={userLogged} />
         ) : (
-          <AiOutlineUser
-            size={22}
-            onClick={() => setUserLoginModalIsOpen(true)}
-          />
+          <AiOutlineUser size={22} onClick={() => dispatch(openModal())} />
         )}
 
-        {userLoginModalIsOpen && (
+        {isModalLoginOpen && (
           <UserModal
-            isOpen={userLoginModalIsOpen}
-            onClose={handleCloseModal}
+            isOpen={isModalLoginOpen}
             onGetUserIsLogged={getUserLogged}
           />
         )}

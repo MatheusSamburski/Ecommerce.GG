@@ -38,11 +38,11 @@
   ],
   "cartProducts": [
     {
-      "id": 0.5925097217348652,
-      "product": "Fone Dragão RGB",
-      "imageUrl": "https://i.ibb.co/T8CwWkk/product-image-headset.jpg",
-      "salePrice": 100,
-      "price": 150
+      "id": 1,
+      "product": "Cadeira Gamer RGB",
+      "imageUrl": "https://i.ibb.co/h9zbBLF/product-image-cadeira.jpg",
+      "salePrice": "",
+      "price": 899
     }
   ]
 }

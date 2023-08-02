@@ -1,15 +1,16 @@
 import ReactModal from "react-modal";
 import { User } from "@/types/User";
-import { ChangeEvent, useState } from "react";
 import { useAuth } from "../../Auth/auth";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import "./styles.scss";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { closeModal } from "@/redux/actions/actions";
+import { useAppDispatch } from "@/redux/store";
+import "./styles.scss";
+import { useEffect, useState } from "react";
 
 interface UserModalProps {
   isOpen: boolean;
-  onClose: () => void;
   onGetUserIsLogged: (user: User) => void;
 }
 
@@ -29,27 +30,14 @@ type CreateUserFormData = z.infer<typeof createUserSchema>;
 
 export default function UserModal({
   isOpen,
-  onClose,
   onGetUserIsLogged,
 }: UserModalProps) {
+  const [name, setUserName] = useState("");
+  const [email, setUserEmail] = useState("");
+  const [password, setUserPassword] = useState("");
+
+  const dispatch = useAppDispatch();
   const auth = useAuth();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    control,
-    watch,
-  } = useForm<CreateUserFormData>({
-    resolver: zodResolver(createUserSchema),
-  });
-
-  const name = watch("name");
-  const email = watch("email");
-  const password = watch("password");
-
-  console.log(name);
-  console.log(email);
-  console.log(password);
 
   const customStyles = {
     content: {
@@ -60,6 +48,25 @@ export default function UserModal({
       borderRadius: "8px",
     },
   };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<CreateUserFormData>({
+    resolver: zodResolver(createUserSchema),
+  });
+
+  const userName = watch("name");
+  const userEmail = watch("email");
+  const userPassword = watch("password");
+
+  useEffect(() => {
+    setUserName(userName);
+    setUserEmail(userEmail);
+    setUserPassword(userPassword);
+  }, [name, email, password]);
 
   async function handleSignin(name: string, email: string, password: string) {
     const data = await auth.signin(name, email, password);
@@ -80,43 +87,48 @@ export default function UserModal({
     <ReactModal
       style={customStyles}
       isOpen={isOpen}
-      onRequestClose={() => onClose()}
+      onRequestClose={() => dispatch(closeModal())}
     >
       <div className="modal-content">
         <header>
           <h1>Faça seu Login</h1>
         </header>
-        <div className="input-name">
-          <label htmlFor="name">Name</label>
-          <input
-            type="name"
-            placeholder="Qual seu nome?"
-            {...register("name")}
-          />
-          {errors.name && <span>{errors.name?.message}</span>}
-        </div>
-        <div className="input-email">
-          <label htmlFor="email">E-mail</label>
-          <input
-            type="email"
-            placeholder="Digite seu email"
-            {...register("email")}
-          />
-          {errors.email && <span>{errors.email?.message}</span>}
-        </div>
-        <div className="input-password">
-          <label htmlFor="password">Senha</label>
-          <input
-            type="password"
-            placeholder="Digite sua senha"
-            {...register("password")}
-          />
-          {errors.password && <span>{errors.password?.message}</span>}
-        </div>
-        <button onClick={() => handleSignin(name, email, password)}>
-          Entrar
-        </button>
+
+        <form
+          onSubmit={handleSubmit(() => handleSignin(name, email, password))}
+        >
+          <div className="input-name">
+            <label htmlFor="name">Name</label>
+            <input
+              type="name"
+              placeholder="Qual seu nome?"
+              {...register("name")}
+            />
+            {errors.name && <span>{errors.name?.message}</span>}
+          </div>
+          <div className="input-email">
+            <label htmlFor="email">E-mail</label>
+            <input
+              type="email"
+              placeholder="Digite seu email"
+              {...register("email")}
+            />
+            {errors.email && <span>{errors.email?.message}</span>}
+          </div>
+          <div className="input-password">
+            <label htmlFor="password">Senha</label>
+            <input
+              type="password"
+              placeholder="Digite sua senha"
+              {...register("password")}
+            />
+            {errors.password && <span>{errors.password?.message}</span>}
+          </div>
+          <button type="submit">Entrar</button>
+        </form>
       </div>
     </ReactModal>
   );
 }
+
+// onClick={() => handleSignin(name, email, password)}

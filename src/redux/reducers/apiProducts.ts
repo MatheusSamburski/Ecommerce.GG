@@ -1,13 +1,14 @@
 import { productsApi } from "@/lib/axios";
+import { ProductProps } from "@/types/Products";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface ProductState {
-  product: any []
+  product: any[];
 }
 
 const initialState: ProductState = {
   product: [],
-}
+};
 
 export const getProduct = createAsyncThunk("products/getProducts", async () => {
   const response = await productsApi.get("/products");
@@ -20,7 +21,7 @@ const productsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getProduct.fulfilled, (state, action) => {
-      state.product = action.payload
+      state.product = action.payload;
     });
   },
 });

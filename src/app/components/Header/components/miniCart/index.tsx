@@ -1,29 +1,29 @@
 "use client";
-import { getCartProduct } from "@/redux/reducers/apiCartProducts";
-import { AppDispatch, RootState } from "@/redux/store";
+import { useEffect } from "react";
+import ReactModal from "react-modal";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import Link from "next/link";
+import { getCartProduct } from "@/redux/reducers/apiCartProducts";
+import { RootState, useAppDispatch } from "@/redux/store";
+import { useSelector } from "react-redux";
+import { closeModalCart } from "@/redux/actions/actions";
 import {
   AiOutlineTag,
   AiOutlineMinus,
   AiOutlinePlus,
   AiOutlineClose,
 } from "react-icons/ai";
-import { useSelector, useDispatch } from "react-redux";
-import ReactModal from "react-modal";
 import "./styles.scss";
-import Link from "next/link";
 
 export interface UserModalProps {
   isOpen: boolean;
-  onClose: () => void;
 }
 
-export default function MiniCart({ isOpen, onClose }: UserModalProps) {
+export default function MiniCart({ isOpen }: UserModalProps) {
   const products = useSelector(
     (state: RootState) => state.cartProduct.cartProduct
   );
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getCartProduct());
@@ -49,13 +49,18 @@ export default function MiniCart({ isOpen, onClose }: UserModalProps) {
       totalPrice += value;
     });
 
-    return totalPrice;
+    const formattedTotalPrice = totalPrice.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+    return formattedTotalPrice;
   }
 
   return (
     <ReactModal
       isOpen={isOpen}
-      onRequestClose={() => onClose()}
+      onRequestClose={() => dispatch(closeModalCart())}
       style={customStyles}
     >
       <div className="app">
@@ -101,7 +106,7 @@ export default function MiniCart({ isOpen, onClose }: UserModalProps) {
         <footer>
           <div className="total">
             <span>Total:</span>
-            <strong>R$ {showTotalPriceInCart()}</strong>
+            <strong>{showTotalPriceInCart()}</strong>
           </div>
 
           <div className="cupom">

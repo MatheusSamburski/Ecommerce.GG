@@ -2,59 +2,43 @@
 import Image from "next/image";
 import "./styles.scss";
 import { useState, useEffect } from "react";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getProduct } from "../../../redux/reducers/apiProducts";
-import { AppDispatch, RootState } from "@/redux/store";
-import { productsApi } from "@/lib/axios";
-import { randomUUID } from "crypto";
-
-interface productProps {
-  id: number;
-  product: string;
-  imageUrl: string;
-  salePrice: number;
-  price: number;
-}
+import { RootState, useAppDispatch } from "@/redux/store";
+import { ProductProps } from "@/types/Products";
+import { postProductToCart } from "@/redux/reducers/apiCartProducts";
 
 export default function Products() {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const listProducts = useSelector((state: RootState) => state.product.product);
-  const [cartProducts, setCartProducts] = useState<productProps>({
-    id: 0,
-    product: "",
-    imageUrl: "",
-    salePrice: 0,
-    price: 0,
-  });
+  const [productAddedToCart, setProductAddedToCart] = useState(false);
+  const [indexButton, setIndexButton] = useState("");
 
   useEffect(() => {
     dispatch(getProduct());
   }, [dispatch]);
 
-  function handleAddProductToCart(product: productProps) {
-    setCartProducts({
-      id: Math.random(),
-      product: product.product,
-      imageUrl: product.imageUrl,
-      salePrice: product.salePrice,
-      price: product.price,
-    });
+  function showTextProductAddedToCart(index: any) {
+    if (index === indexButton) {
+      return "Produto adicionado...";
+    }
+
+    setTimeout(() => {
+      setProductAddedToCart(false);
+    }, 2000);
   }
 
-  useEffect(() => {
-    if (cartProducts.product !== "") {
-      productsApi
-        .post("/cartProducts", cartProducts)
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error));
-    }
-  }, [cartProducts]);
+  function handleAddProductToCart(product: ProductProps, index: any) {
+    dispatch(postProductToCart(product));
+    setIndexButton(index);
+    setProductAddedToCart(true);
+    showTextProductAddedToCart(index);
+  }
 
   return (
     <div>
       <main className="product-boxes">
-        {listProducts?.map((product) => {
+        {listProducts?.map((product, index) => {
           return (
             <>
               <div className="product" key={product.id}>
@@ -78,9 +62,13 @@ export default function Products() {
                 <button
                   className="button-add-to-cart"
                   type="button"
-                  onClick={() => handleAddProductToCart(product)}
+                  onClick={() => handleAddProductToCart(product, index)}
                 >
-                  Adicionar ao carrinho
+                  <span>
+                    {!productAddedToCart
+                      ? "Adicionar ao carrinho"
+                      : showTextProductAddedToCart(index)}
+                  </span>
                 </button>
               </div>
             </>
