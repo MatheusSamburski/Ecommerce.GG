@@ -1,13 +1,13 @@
+import { useEffect, useState } from "react";
 import ReactModal from "react-modal";
-import { User } from "@/types/User";
-import { useAuth } from "../../Auth/auth";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { closeModal } from "@/redux/actions/actions";
 import { useAppDispatch } from "@/redux/store";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { User } from "@/types/User";
+import { useAuth } from "../../Auth/auth";
 import "./styles.scss";
-import { useEffect, useState } from "react";
 
 interface UserModalProps {
   isOpen: boolean;
@@ -98,7 +98,7 @@ export default function UserModal({
           onSubmit={handleSubmit(() => handleSignin(name, email, password))}
         >
           <div className="input-name">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Nome</label>
             <input
               type="name"
               placeholder="Qual seu nome?"

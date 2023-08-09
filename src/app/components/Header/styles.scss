@@ -27,11 +27,32 @@
       cursor: pointer;
     }
 
+    .content-icon-cart-and-qty {
+      position: relative;
+
+      span {
+        position: absolute;
+        font-size: 12px;
+        background: var(--color-green-success-light);
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        font-weight: bold;
+        right: -5px;
+        color: var(--color-red-mid);
+      }
+    }
+
     .user-logged {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      margin-top: 12px;
 
       span {
         color: var(--color-white);

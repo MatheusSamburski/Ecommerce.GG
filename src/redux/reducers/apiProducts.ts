@@ -1,5 +1,4 @@
 import { productsApi } from "@/lib/axios";
-import { ProductProps } from "@/types/Products";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface ProductState {

@@ -31,7 +31,7 @@ export default function Header() {
 
   useEffect(() => {
     dispatch(getCartProduct());
-  }, [dispatch, products]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (products.length === 0) {
@@ -56,7 +56,10 @@ export default function Header() {
             <BsCart2 size={22} />
           </Link>
         ) : (
-          <BsCart2 size={22} onClick={() => dispatch(openModalCart())} />
+          <div className="content-icon-cart-and-qty">
+            <BsCart2 size={22} onClick={() => dispatch(openModalCart())} />
+            <span>{products.length}</span>
+          </div>
         )}
 
         {isModalCartOpen && <MiniCart isOpen={isModalCartOpen} />}

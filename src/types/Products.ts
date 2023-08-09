@@ -3,5 +3,6 @@ export interface ProductProps {
     product: string;
     imageUrl: string;
     salePrice: number;
+    quantity: number;
     price: number;
   }

@@ -38,11 +38,20 @@
   ],
   "cartProducts": [
     {
-      "id": 1,
+      "id": 0.0387559321033315,
       "product": "Cadeira Gamer RGB",
       "imageUrl": "https://i.ibb.co/h9zbBLF/product-image-cadeira.jpg",
       "salePrice": "",
+      "quantity": 1,
       "price": 899
+    },
+    {
+      "id": 0.9357637398463887,
+      "product": "Pato decorativo (+fps)",
+      "imageUrl": "https://i.ibb.co/jTcsSzn/product-image-patinho.jpg",
+      "salePrice": "",
+      "quantity": 1,
+      "price": 5
     }
   ]
 }

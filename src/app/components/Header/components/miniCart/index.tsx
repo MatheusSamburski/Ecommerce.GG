@@ -3,16 +3,17 @@ import { useEffect } from "react";
 import ReactModal from "react-modal";
 import Image from "next/image";
 import Link from "next/link";
-import { getCartProduct } from "@/redux/reducers/apiCartProducts";
+import {
+  getCartProduct,
+  deleteProductToCart,
+  updatedProductToCart,
+} from "@/redux/reducers/apiCartProducts";
 import { RootState, useAppDispatch } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { closeModalCart } from "@/redux/actions/actions";
-import {
-  AiOutlineTag,
-  AiOutlineMinus,
-  AiOutlinePlus,
-  AiOutlineClose,
-} from "react-icons/ai";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { Trash } from "@phosphor-icons/react";
+import { valueFormatter } from "@/utils/formatter";
 import "./styles.scss";
 
 export interface UserModalProps {
@@ -46,13 +47,12 @@ export default function MiniCart({ isOpen }: UserModalProps) {
 
     products.forEach((product) => {
       const value = product.price;
-      totalPrice += value;
+      product.quantity !== 0
+        ? (totalPrice += value * product.quantity)
+        : (totalPrice += value);
     });
 
-    const formattedTotalPrice = totalPrice.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    });
+    const formattedTotalPrice = valueFormatter(totalPrice);
 
     return formattedTotalPrice;
   }
@@ -66,16 +66,17 @@ export default function MiniCart({ isOpen }: UserModalProps) {
       <div className="app">
         <header>
           <div>
-            Seu carrinho tem <strong>X itens</strong>
+            Seu carrinho tem{" "}
+            <strong>
+              {products.length} {products.length === 1 ? "item" : "itens"}
+            </strong>
           </div>
-
-          <AiOutlineClose />
         </header>
         <main className="container-products">
           {products?.map((product) => {
             return (
               <>
-                <div className="item" key={product.product}>
+                <div className="item" key={product.id}>
                   <Image
                     width={150}
                     height={150}
@@ -86,18 +87,43 @@ export default function MiniCart({ isOpen }: UserModalProps) {
                     <h4 className="title">{product.product}</h4>
                     <div className="price-qty">
                       <div className="qty">
-                        <button className="sub">
+                        <button
+                          className="sub"
+                          onClick={() =>
+                            dispatch(
+                              updatedProductToCart({
+                                id: product.id,
+                                newQuantity: product.quantity - 1,
+                              })
+                            )
+                          }
+                        >
                           <AiOutlineMinus />
                         </button>
 
-                        <span>1</span>
-                        <button className="add">
+                        <span>{product.quantity}</span>
+                        <button
+                          className="add"
+                          onClick={() =>
+                            dispatch(
+                              updatedProductToCart({
+                                id: product.id,
+                                newQuantity: product.quantity + 1,
+                              })
+                            )
+                          }
+                        >
                           <AiOutlinePlus />
                         </button>
                       </div>
                       <div className="price">R$ {product.price}</div>
                     </div>
                   </div>
+                  <Trash
+                    className="icon-delete"
+                    size={32}
+                    onClick={() => dispatch(deleteProductToCart(product.id))}
+                  />
                 </div>
               </>
             );
@@ -109,13 +135,10 @@ export default function MiniCart({ isOpen }: UserModalProps) {
             <strong>{showTotalPriceInCart()}</strong>
           </div>
 
-          <div className="cupom">
-            <AiOutlineTag />
-            <span>Adicionar cupom</span>
-          </div>
-
           <Link href="/Cart">
-            <button>Finalizar compra</button>
+            <button onClick={() => dispatch(closeModalCart())}>
+              Finalizar compra
+            </button>
           </Link>
         </footer>
       </div>

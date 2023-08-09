@@ -45,6 +45,7 @@ header {
 
 .item {
   display: flex;
+  align-items: center;
 
   .details {
     display: flex;
@@ -53,6 +54,16 @@ header {
     align-items: center;
     margin-left: 50px;
     gap: 15px;
+  }
+
+  .icon-delete {
+    color: var(--color-red-mid);
+    cursor: pointer;
+    transition: transform 0.8s;
+  }
+
+  .icon-delete:hover {
+    transform: scale(1.2);
   }
 }
 
@@ -75,7 +86,7 @@ header {
 
 .price {
   font-weight: 700;
-  color: var(--color-red-mid);
+  color: var(--color-green-light);
 }
 
 .qty {
@@ -141,21 +152,6 @@ footer {
   strong {
     color: var(--color-green-light);
   }
-}
-
-.cupom {
-  margin-top: 1.6rem;
-  color: var(--color-brand-color-light);
-
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.8rem;
-  cursor: pointer;
-}
-
-.cupom i {
-  font-size: 2rem;
 }
 
 footer {

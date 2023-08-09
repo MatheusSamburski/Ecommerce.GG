@@ -1,44 +1,31 @@
 "use client";
+import { useEffect } from "react";
 import Image from "next/image";
-import "./styles.scss";
-import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getProduct } from "../../../redux/reducers/apiProducts";
 import { RootState, useAppDispatch } from "@/redux/store";
 import { ProductProps } from "@/types/Products";
 import { postProductToCart } from "@/redux/reducers/apiCartProducts";
+import { valueFormatter } from "../../../utils/formatter";
+import "./styles.scss";
 
 export default function Products() {
   const dispatch = useAppDispatch();
   const listProducts = useSelector((state: RootState) => state.product.product);
-  const [productAddedToCart, setProductAddedToCart] = useState(false);
-  const [indexButton, setIndexButton] = useState("");
 
   useEffect(() => {
     dispatch(getProduct());
   }, [dispatch]);
 
-  function showTextProductAddedToCart(index: any) {
-    if (index === indexButton) {
-      return "Produto adicionado...";
-    }
-
-    setTimeout(() => {
-      setProductAddedToCart(false);
-    }, 2000);
-  }
-
-  function handleAddProductToCart(product: ProductProps, index: any) {
+  function handleAddProductToCart(product: ProductProps) {
     dispatch(postProductToCart(product));
-    setIndexButton(index);
-    setProductAddedToCart(true);
-    showTextProductAddedToCart(index);
+    alert("Produto adicionado ao carrinho com sucesso!");
   }
 
   return (
     <div>
       <main className="product-boxes">
-        {listProducts?.map((product, index) => {
+        {listProducts?.map((product) => {
           return (
             <>
               <div className="product" key={product.id}>
@@ -53,22 +40,18 @@ export default function Products() {
 
                 {product.salePrice ? (
                   <div className="product-sale-price">
-                    <span>R$ {product.price}</span>
-                    <span>R$ {product.salePrice}</span>
+                    <span>{valueFormatter(product.price)}</span>
+                    <span>{valueFormatter(product.salePrice)}</span>
                   </div>
                 ) : (
-                  <span>R$ {product.price}</span>
+                  <span>{valueFormatter(product.price)}</span>
                 )}
                 <button
                   className="button-add-to-cart"
                   type="button"
-                  onClick={() => handleAddProductToCart(product, index)}
+                  onClick={() => handleAddProductToCart(product)}
                 >
-                  <span>
-                    {!productAddedToCart
-                      ? "Adicionar ao carrinho"
-                      : showTextProductAddedToCart(index)}
-                  </span>
+                  <span>Adicionar ao carrinho</span>
                 </button>
               </div>
             </>

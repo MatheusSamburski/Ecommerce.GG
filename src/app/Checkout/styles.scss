@@ -1,0 +1,17 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  gap: 20px;
+
+  div {
+    border-radius: 5px;
+    border: 1px solid gray;
+  }
+
+  aside {
+    border-radius: 5px;
+    border: 1px solid gray;
+  }
+}
