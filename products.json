@@ -38,15 +38,23 @@
   ],
   "cartProducts": [
     {
-      "id": 0.0387559321033315,
-      "product": "Cadeira Gamer RGB",
-      "imageUrl": "https://i.ibb.co/h9zbBLF/product-image-cadeira.jpg",
-      "salePrice": "",
+      "id": 0.927618363474221,
+      "product": "Teclado Gamer RGB",
+      "imageUrl": "https://i.ibb.co/mtjv9zb/product-image-teclado.jpg",
+      "salePrice": 200,
       "quantity": 1,
-      "price": 899
+      "price": 250
     },
     {
-      "id": 0.9357637398463887,
+      "id": 0.2260899037124271,
+      "product": "Fone Dragão RGB",
+      "imageUrl": "https://i.ibb.co/T8CwWkk/product-image-headset.jpg",
+      "salePrice": 100,
+      "quantity": 1,
+      "price": 150
+    },
+    {
+      "id": 0.08520143648964984,
       "product": "Pato decorativo (+fps)",
       "imageUrl": "https://i.ibb.co/jTcsSzn/product-image-patinho.jpg",
       "salePrice": "",

@@ -31,7 +31,7 @@ export default function Header() {
 
   useEffect(() => {
     dispatch(getCartProduct());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (products.length === 0) {

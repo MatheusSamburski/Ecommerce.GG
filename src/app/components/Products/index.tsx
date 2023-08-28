@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { getProduct } from "../../../redux/reducers/apiProducts";
@@ -15,7 +15,7 @@ export default function Products() {
 
   useEffect(() => {
     dispatch(getProduct());
-  }, [dispatch]);
+  }, []);
 
   function handleAddProductToCart(product: ProductProps) {
     dispatch(postProductToCart(product));

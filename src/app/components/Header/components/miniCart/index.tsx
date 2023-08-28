@@ -42,11 +42,11 @@ export default function MiniCart({ isOpen }: UserModalProps) {
     },
   };
 
-  function showTotalPriceInCart() {
+  function calculateAndShowTotalPrice() {
     let totalPrice = 0;
 
     products.forEach((product) => {
-      const value = product.price;
+      const value = product.salePrice ? product.salePrice : product.price;
       product.quantity !== 0
         ? (totalPrice += value * product.quantity)
         : (totalPrice += value);
@@ -100,7 +100,7 @@ export default function MiniCart({ isOpen }: UserModalProps) {
                         >
                           <AiOutlineMinus />
                         </button>
-
+                        
                         <span>{product.quantity}</span>
                         <button
                           className="add"
@@ -116,7 +116,9 @@ export default function MiniCart({ isOpen }: UserModalProps) {
                           <AiOutlinePlus />
                         </button>
                       </div>
-                      <div className="price">R$ {product.price}</div>
+                      <div className="price">
+                        {product.salePrice ? valueFormatter(product.salePrice) : valueFormatter(product.price)}
+                      </div>
                     </div>
                   </div>
                   <Trash
@@ -132,10 +134,10 @@ export default function MiniCart({ isOpen }: UserModalProps) {
         <footer>
           <div className="total">
             <span>Total:</span>
-            <strong>{showTotalPriceInCart()}</strong>
+            <strong>{calculateAndShowTotalPrice()}</strong>
           </div>
 
-          <Link href="/Cart">
+          <Link href="/Checkout">
             <button onClick={() => dispatch(closeModalCart())}>
               Finalizar compra
             </button>
