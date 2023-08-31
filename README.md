@@ -15,7 +15,7 @@ A intenção desse projeto é colocar em prática meus conhecimentos em REDUX e 
 
 ### Checkout
 
-![Captura de tela do mini cart](./src/images/checkout.png)
+![Captura de tela do checkout](./src/images/checkout.png)
 
 ## Tecnologias Usadas
 
