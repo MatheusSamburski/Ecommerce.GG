@@ -11,7 +11,7 @@ A intenção desse projeto é colocar em prática meus conhecimentos em REDUX e 
 
 ### Mini Cart
 
-![Captura de tela do mini cart](./src/images/mini-cart.png)
+![Captura de tela do mini cart](./src/images/minicart.png)
 
 ### Checkout
 
