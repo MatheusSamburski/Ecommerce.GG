@@ -60,6 +60,14 @@
       "salePrice": "",
       "quantity": 1,
       "price": 5
+    },
+    {
+      "id": 0.6543322677557437,
+      "product": "Cadeira Gamer RGB",
+      "imageUrl": "https://i.ibb.co/h9zbBLF/product-image-cadeira.jpg",
+      "salePrice": "",
+      "quantity": 1,
+      "price": 899
     }
   ]
 }
